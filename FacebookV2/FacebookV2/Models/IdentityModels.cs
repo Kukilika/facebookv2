@@ -27,6 +27,18 @@ namespace FacebookV2.Models
         {
         }
 
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<County> Counties { get; set; }
+        public DbSet<Friend> Friends { get; set; }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.HasDefaultSchema("dbo");
+                
+        //    base.OnModelCreating(modelBuilder);
+        //}
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
