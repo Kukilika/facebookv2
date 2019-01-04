@@ -7,13 +7,13 @@ namespace FacebookV2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class UserCreatedDate : IMigrationMetadata
+    public sealed partial class Test2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UserCreatedDate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Test2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901021242025_UserCreatedDate"; }
+            get { return "201901041045255_Test2"; }
         }
         
         string IMigrationMetadata.Source

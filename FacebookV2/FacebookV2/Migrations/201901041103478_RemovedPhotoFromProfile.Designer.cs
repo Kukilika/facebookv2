@@ -7,13 +7,13 @@ namespace FacebookV2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddedFriend : IMigrationMetadata
+    public sealed partial class RemovedPhotoFromProfile : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedFriend));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RemovedPhotoFromProfile));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901021749328_AddedFriend"; }
+            get { return "201901041103478_RemovedPhotoFromProfile"; }
         }
         
         string IMigrationMetadata.Source

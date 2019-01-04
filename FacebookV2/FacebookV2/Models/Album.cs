@@ -6,15 +6,15 @@ using System.Web;
 
 namespace FacebookV2.Models
 {
-    public class City
+    public class Album
     {
-        public int Id { get; set; }
-        public int CountyId { get; set; }
+        public long Id { get; set; }
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
+        public string ProfileId { get; set; }
 
-        public virtual County County { get; set; }
-        public virtual ICollection<Profile> Profiles { get; set; }
+        public virtual Profile Profile { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
     }
 }

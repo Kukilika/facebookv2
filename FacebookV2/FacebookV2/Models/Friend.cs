@@ -9,16 +9,11 @@ namespace FacebookV2.Models
 {
     public class Friend
     {
-        [Key]
-        [Column(Order = 1)]
         public string SenderId { get; set; }
-        [Key]
-        [Column(Order = 2)]
         public string ReceiverId { get; set; }
-        [Required]
         public DateTime CreatedDate { get; set; }
 
-        public virtual ApplicationUser Sender { get; set; }
-        public virtual ApplicationUser Receiver { get; set; }
+        public virtual Profile Sender { get; set; }
+        public virtual Profile Receiver { get; set; }
     }
 }
