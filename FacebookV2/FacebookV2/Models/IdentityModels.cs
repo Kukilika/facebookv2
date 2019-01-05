@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Mvc;
+using FacebookV2.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -11,6 +15,7 @@ namespace FacebookV2.Models
     public class ApplicationUser : IdentityUser
     {
         public DateTime CreatedDate { get; set; }
+        public IEnumerable<SelectListItem> AllRoles { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -25,6 +30,31 @@ namespace FacebookV2.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+        }
+
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<County> Counties { get; set; }
+        public DbSet<Friend> Friends { get; set; }
+        public DbSet<FriendRequest> FriendRequests { get; set; }
+        public DbSet<Album> Albums { get; set; }
+        public DbSet<Photo> Photos { get; set; }
+        public DbSet<Like> Likes { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Message> Messages { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.HasDefaultSchema("dbo");
+
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            modelBuilder.Configurations.Add(new GroupEntityConfiguration());
+            modelBuilder.Configurations.Add(new FriendEntityConfiguration());
+            modelBuilder.Configurations.Add(new FriendRequestEntityConfiguration());
         }
 
         public static ApplicationDbContext Create()
