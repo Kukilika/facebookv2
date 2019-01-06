@@ -10,7 +10,6 @@ namespace FacebookV2.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "FacebookV2.Models.ApplicationDbContext";
         }
 
         protected override void Seed(FacebookV2.Models.ApplicationDbContext context)
