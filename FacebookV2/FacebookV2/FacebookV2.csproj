@@ -168,18 +168,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\BaseController.cs" />
+    <Content Include="App_Code\Class1.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\ProfileRequiredActionFilter.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SkipMyGlobalActionFilterAttribute.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Configuration\FriendEntityConfiguration.cs" />
     <Compile Include="Configuration\FriendRequestEntityConfiguration.cs" />
     <Compile Include="Configuration\GroupEntityConfiguration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Enums\FriendRequestStatusTypes.cs" />
+    <Compile Include="Enums\GenderTypes.cs" />
+    <Compile Include="Enums\PrivacyTypes.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -210,11 +219,13 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\AlbumViewModels.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\County.cs" />
     <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\FriendRequest.cs" />
+    <Compile Include="Models\FriendViewModels.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Like.cs" />
@@ -222,6 +233,7 @@
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\ProfileViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -230,10 +242,16 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\Friends.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app\createProfile.js" />
+    <Content Include="Scripts\app\editProfile.js" />
+    <Content Include="Scripts\app\friendRequests.js" />
+    <Content Include="Scripts\app\friendView.js" />
+    <Content Include="Scripts\app\showProfile.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -258,9 +276,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -285,10 +300,20 @@
     <Content Include="Views\Shared\InternalServerError.cshtml" />
     <Content Include="Views\Shared\InvalidInputView.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Profile\Show.cshtml" />
+    <Content Include="Views\Shared\_AlbumView.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\Create.cshtml" />
+    <Content Include="Views\Friend\GetAll.cshtml" />
+    <Content Include="Views\Shared\_FriendView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
+    <Folder Include="Views\Album\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\City\" />
+    <Folder Include="Views\Photo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

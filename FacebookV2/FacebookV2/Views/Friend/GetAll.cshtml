@@ -1,0 +1,51 @@
+﻿@model FacebookV2.Models.FriendsDetailsViewModel
+
+<link rel="stylesheet" href="~/Content/css/Friends.css" />
+
+@{
+    ViewData["Title"] = "View Friends";
+}
+
+<div class="friend-requests">
+    <p class="edit-title">Friend Requests</p>
+    @foreach (var friendRequest in Model.FriendRequests)
+    {
+        <div class="user-box">
+            @if (friendRequest.RequesterProfilePictureId.HasValue)
+            {
+                <img src="/Photo/GetProfilePicture/@friendRequest.RequesterProfilePictureId.Value" class="profilePicture" />
+            }
+            else
+            {
+                <img src="~/images/default_profilePicture.jpg" class="profilePicture" />
+            }
+
+            <span class="userName" userId="@friendRequest.RequesterId">
+                @friendRequest.RequesterLastName @friendRequest.RequesterFirstName
+            </span>
+            <br />
+            <span class="date-requested">@friendRequest.DaysSinceRequested</span>
+
+            <div class="buttons">
+                <button type="button" class="btn btn-success approve" requesterid="@friendRequest.RequesterId">Approve</button>
+                <button type="button" class="btn btn-danger reject" requesterid="@friendRequest.RequesterId">Reject</button>
+            </div>
+            <br />
+        </div>
+    }
+</div>
+
+<div class="friends">
+    <p class="edit-title">Your Friends</p>
+    <div id="friends">
+        @foreach (var friend in Model.Friends)
+        {
+            @Html.Partial("_FriendView", friend);
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/app/friendRequests.js"></script>
+    <script src="~/Scripts/app/friendView.js"></script>
+}

@@ -1,0 +1,86 @@
+﻿@model FacebookV2.Models.ShowProfileViewModel
+
+<link href="~/Content/css/showProfile.css" rel="stylesheet" />
+
+@{
+    ViewData["Title"] = "View Profile";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="user-box" id="userInfo">
+            <span class="user-name">@Model.LastName @Model.FirstName's Profile</span>
+
+            @if (Model.ProfilePhotoId != null)
+            {
+                <img src="/Photo/GetProfilePicture/@Model.ProfilePhotoId" class="profilePicture" />
+            }
+            else
+            {
+                <img src="~/images/default_profilePicture.jpg" class="profilePicture" />
+            }
+
+            @if (Model.CanSendFriendRequest)
+            {
+                <button type="button" class="btn btn-light friend-button" id="sendFriendRequest" userId="@Model.Id">Send friend request</button>
+            }
+            else if (Model.IsPendingForUser)
+            {
+                <button type="button" class="btn btn-light friend-button" disabled>Pending friend request</button>
+            }
+        </div>
+
+        <p class="edit-title">Contact information</p>
+        <div class="contact-info">
+            <div class="form-group">
+                <label> First Name </label>
+                @Html.LabelFor(m => m.FirstName, Model.FirstName, new { @class = "control-label" })
+            </div>
+
+            <div class="form-group">
+                <label> Last Name </label>
+                @Html.LabelFor(m => m.LastName, Model.LastName, new { @class = "control-label" })
+            </div>
+        </div>
+        @if (Model.IsAvailableToView)
+        {
+            <div class="contact-info">
+                <div class="form-group">
+                    <label>Birthday </label>
+                    @Html.LabelFor(m => m.Birthdate, Model.Birthdate?.ToShortDateString() ?? "Not available", new { @class = "control-label" })
+                </div>
+
+                <div class="form-group">
+                    <label> County </label>
+                    @Html.LabelFor(m => m.CountyName, Model.CountyName, new { @class = "control-label" })
+                </div>
+
+                <div class="form-group">
+                    <label> City </label>
+                    @Html.LabelFor(m => m.CityName, Model.CityName, new { @class = "control-label" })
+                </div>
+
+                <div class="form-group">
+                    <label> Gender </label>
+                    @Html.LabelFor(m => m.GenderType, Model.GenderType, new { @class = "control-label" })
+                </div>
+            </div>
+
+            <p class="edit-title">Albums</p>
+            <div>
+                @foreach (var album in Model.Albums)
+                {
+                    <div class="album-summary">
+                        @Html.Partial("_AlbumView", album)
+                        <br />
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/app/showProfile.js"></script>
+}

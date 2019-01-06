@@ -1,0 +1,20 @@
+﻿@model FacebookV2.Models.FriendViewModel
+
+<div class="user-box">
+    @if (Model.ProfilePhotoId != null)
+    {
+        <img src="/Photo/GetProfilePicture/@Model.ProfilePhotoId" />
+    }
+    else
+    {
+        <img src="~/images/default_profilePicture.jpg" />
+    }
+
+    <span class="userName" userId="@Model.Id">@Model.LastName @Model.FirstName</span>
+    <br />
+    <span class="date-requested">Friends since @(Model.CreatedDate.ToString("MMMM")) @(Model.CreatedDate.Year)</span>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/app/friendView.js"></script>
+}

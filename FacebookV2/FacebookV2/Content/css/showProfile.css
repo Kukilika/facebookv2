@@ -1,0 +1,145 @@
+﻿.user-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: darkcyan;
+    margin: 10px 25px;
+    position: absolute;
+}
+
+.user-box img {
+    float: left;
+    width: 130px;
+    height: 120px;
+    object-fit: cover;
+}
+
+#userInfo {
+    margin: 15px;
+    position: relative;
+}
+
+.friend-button {
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+}
+
+.edit-title {
+    font-weight: bold;
+    font-size: 15px;
+    color: #134545;
+    margin: 30px 0 20px 30px;
+}
+
+.contact-info .form-group label:first-child {
+    font-weight: lighter;
+    color: #1b7a81;
+    display: inline-block;
+    width: 15%;
+}
+
+.contact-info .form-group label:nth-child(2) {
+    font-weight: lighter;
+    color: #0f4d51;
+    display: inline-block;
+    width: 15%;
+    font-style: oblique;
+}
+
+.contact-info {
+    margin: 15px;
+}
+
+#interests {
+    font-weight: lighter;
+    color: #1b7a81;
+    display: inline-block;
+    width: 10%;
+    margin: 15px;
+}
+
+.interests-list {
+    display: inline-block;
+}
+
+    .interests-list span {
+        display: inline-block;
+        padding: 5px;
+        background-color: rgba(164, 243, 243, 0.41);
+        border-radius: 15%;
+        border: 1px solid #4da6c3;
+        font-weight: lighter;
+        color: #0f4d51;
+        font-style: oblique;
+        margin: 3px;
+    }
+
+
+
+.albumPhoto img {
+    height: 100px;
+    width: auto;
+}
+
+.albumPhoto {
+    border: 1px solid #4da6c3;
+    margin: 15px;
+    padding: 10px;
+    background-color: rgba(240, 255, 255, 0.4);
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.albumPhoto > img {
+        width: 125px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+.album-summary {
+    display: inline-block;
+    width: 25%;
+}
+
+.view-album-name {
+    color: darkcyan;
+    font-weight: 600;
+    font-size: 14px;
+    font-style: italic;
+    margin-left: 15px;
+}
+
+.view-album-photo .albumPhoto > img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    margin: auto;
+}
+
+.view-album-photo .albumPhoto {
+    margin-top: 5px;
+}
+
+.albumBottom {
+    margin: -15px 15px 0;
+    padding: 5px 10px;
+    background: #dcf2f2;
+    border: 1px solid #4da6c3;
+    border-top: none;
+}
+
+.view-album-photo {
+    position: relative;
+}
+
+.photos-number {
+    color: darkcyan;
+    font-weight: 500;
+    font-size: 12px;
+    font-style: oblique;
+}
+
+.interests-box {
+    display: flex;
+}

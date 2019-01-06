@@ -1,0 +1,30 @@
+﻿@model FacebookV2.Models.ShowAlbumViewModel
+
+@{
+    ViewData["Title"] = "View album";
+}
+
+<div class="view-album-name">@Model.Name</div>
+<div class="view-album-photo">
+    <div data-photo-post-id="@Model.Id" data-no-photos="@Model.NumberOfPhotos" class="albumPhoto">
+        @if (Model.NumberOfPhotos > 0)
+        {
+            <img src="/Photo/GetProfilePicture/@Model.FirstPhotoId" />
+        }
+        else
+        {
+            <img src="~/images/default_empty_album_picture.png" alt="Could not load default picture" />
+        }
+    </div>
+    <div class="albumBottom">
+        <span class="photos-number">@Model.NumberOfPhotos photos</span>
+        @if (Model.IsEditable == true)
+        {
+            <button type="button" class="btn btn-outline-info edit" data-edit-post-id="@Model.Id">Edit</button>
+            <button type="button" class="btn btn-danger delete" data-delete-post-id="@Model.Id">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        }
+    </div>
+
+</div>
