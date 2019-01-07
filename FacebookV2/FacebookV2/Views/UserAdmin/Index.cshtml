@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Afisare Profile</h2>
+
+@foreach (var profile in ViewBag.Profiles)
+{
+    <p>@profile.FirstName</p>
+    //<a href="/Categories/Show/@category.CategoryId">Afisare categorie</a>
+    <br />
+    <p>@profile.LastName</p>
+    <br />
+    <p>@profile.IsPublic</p>
+    <br />
+    <p>@profile.IsDeletedByAdmin</p>
+    <hr />
+    <br />
+}
