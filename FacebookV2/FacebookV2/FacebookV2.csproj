@@ -283,20 +283,17 @@
     <Content Include="Views\Shared\InternalServerError.cshtml" />
     <Content Include="Views\Shared\InvalidInputView.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\UserAdmin\Index.cshtml" />
     <Content Include="Views\UserAdmin\Show.cshtml" />
     <Content Include="Views\UserAdmin\ErrorView.cshtml" />
     <Content Include="Views\UserAdmin\Edit.cshtml" />
     <Content Include="Views\UserAdmin\New.cshtml" />
-=======
     <Content Include="Views\Profile\Show.cshtml" />
     <Content Include="Views\Shared\_AlbumView.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Profile\Create.cshtml" />
     <Content Include="Views\Friend\GetAll.cshtml" />
     <Content Include="Views\Shared\_FriendView.cshtml" />
->>>>>>> AddingProfile
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
