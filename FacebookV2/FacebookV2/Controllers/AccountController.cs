@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FacebookV2.Models;
+using FacebookV2.App_Start;
 
 namespace FacebookV2.Controllers
 {
@@ -165,7 +166,7 @@ namespace FacebookV2.Controllers
 
                     UserManager.AddToRole(user.Id, "User");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Create", "Profile");
                 }
                 AddErrors(result);
             }
@@ -391,10 +392,11 @@ namespace FacebookV2.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [SkipMyGlobalActionFilter]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //
@@ -451,7 +453,7 @@ namespace FacebookV2.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ShowMyProfile", "Profile");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

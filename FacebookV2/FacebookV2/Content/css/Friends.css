@@ -1,0 +1,71 @@
+﻿.edit-title {
+    font-weight: bold;
+    font-size: 17px;
+    color: darkcyan;
+    margin: 15px;
+}
+
+.friend-requests {
+    width: 100%;
+    margin: 20px;
+}
+
+.friends {
+    width: 100%;
+    margin-left: 20px;
+    margin-top: 50px;
+}
+
+.friend-requests .user-box img {
+    float: left;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.friend-requests .user-box {
+    overflow: auto;
+    height: auto;
+    overflow: auto;
+    margin-bottom: 15px;
+}
+
+    .friend-requests .user-box .userName {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #1e7170;
+        line-height: 20px;
+        padding: 15px 5px 15px 30px;
+        cursor: pointer;
+    }
+
+.date-requested {
+    color: lightslategray;
+    padding: 15px 5px 15px 30px;
+}
+
+.buttons {
+    float: right;
+}
+
+.friends .user-box {
+    margin-bottom: 10px;
+}
+
+    .friends .user-box img {
+        float: left;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .friends .user-box .userName {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #1e7170;
+        line-height: 20px;
+        padding: 15px 5px 15px 30px;
+        cursor: pointer;
+    }

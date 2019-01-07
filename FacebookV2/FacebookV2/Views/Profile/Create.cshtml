@@ -1,0 +1,102 @@
+﻿@model FacebookV2.Models.CreateProfileViewModel
+@using FacebookV2.Enums
+
+
+<link href="~/Contet/css/editProfile.css" rel="stylesheet" />
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form action="/Profile/Create" method="post" enctype="multipart/form-data">
+             @Html.HiddenFor(m => m.Id)
+
+            <p class="edit-title">Edit contact information</p>
+            <div class="edit-contact">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FirstName, "First Name")
+                    <br />
+                    @Html.EditorFor(m => m.FirstName)
+                    @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastName, "Last Name")
+                    <br />
+                    @Html.EditorFor(m => m.LastName)
+                    @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Birthday, "Birthday")
+                    <br />
+                    @Html.EditorFor(m => m.Birthday)
+                    @Html.ValidationMessageFor(m => m.Birthday, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="edit-contact">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CountyId, "County")
+                    <br />
+                    @Html.DropDownListFor(m => m.CountyId,
+                        new SelectList(Model.Counties, "Value", "Text"),
+                        "Select..",
+                        new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CityId, "City")
+                    <br />
+                    <select id="CityDropDown" name="CityId" class="form-control">
+                        <option value="select" selected disabled hidden>Select..</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Gender")
+                    <br />
+                    @Html.RadioButtonFor(m => m.IsMale, true) @Html.LabelFor(m => m.IsMale, "Male")
+                    <br />
+                    @Html.RadioButtonFor(m => m.IsMale, false) @Html.LabelFor(m => m.IsMale, "Female")
+                </div>
+            </div>
+
+            <p class="edit-title">Edit privacy settings</p>
+            <div class="privacy">
+                <div class="form-group">
+                    <div class="privacy-option">
+                        @Html.RadioButtonFor(m => m.IsPublic, true)
+                        <label>@PrivacyTypes.Public</label>
+                        <span>- Your profile is visible to anyone</span>
+                    </div>
+                    <br />
+                    <div class="privacy-option">
+                        @Html.RadioButtonFor(m => m.IsPublic, false)
+                        <label>@PrivacyTypes.Private</label>
+                        <span>- Your profile is visible only to your friends</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="edit-title">Change profile picture</p>
+            <div class="edit-picture">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ProfilePhoto, "Choose profile picture :")
+                    <input name="ProfilePhoto" type="file" />
+                    @Html.ValidationMessageFor(m => m.ProfilePhoto, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save changes" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/app/createProfile.js"></script>
+}
