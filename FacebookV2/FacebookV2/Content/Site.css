@@ -1,24 +1,172 @@
-﻿body {
-    padding-top: 50px;
+﻿/*body {
+    padding-top: 200px;
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
+/* Set padding to keep content from hitting the edges 
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
+ /*Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
-*/
+
 .dl-horizontal dt {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+ /*Set width on the form input elements since they're 100% wide by default 
 input,
 select,
 textarea {
     max-width: 280px;
+}
+*/
+
+
+body {
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.navbar-collapse {
+    float: left;
+}
+
+.navbar .select2 {
+    width: 300px !important;
+    float: left;
+    margin: 11px 5px;
+}
+
+.navbar #searchBar {
+    display: none;
+}
+
+.navbar-inverse {
+    background-color: #40a8ab;
+    border-color: #40a8ab
+}
+
+    .navbar-inverse .navbar-brand {
+        color: #fff;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #fff;
+    }
+
+.side-bar {
+    width: 250px;
+    position: fixed;
+    height: calc(100% - 50px);
+    top: 50px;
+    background: #fff;
+    border-left: 1px solid #4da6c3;
+    border-right: 1px solid #4da6c3;
+    padding: 20px 30px;
+}
+
+    .side-bar .user-box img {
+        float: left;
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .side-bar .user-box span {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        color: #1e7170;
+        line-height: 20px;
+        padding: 15px 5px 15px 60px;
+        cursor: pointer;
+    }
+
+    .side-bar .user-box:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .side-bar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        margin-top: 20px;
+    }
+
+        .side-bar ul li {
+            list-style: none;
+            padding: 0;
+            border-top: 1px solid #4da6c3;
+            border-bottom: 1px solid #4da6c3;
+            margin: 0 -30px;
+        }
+
+            .side-bar ul li + li {
+                border-top: none;
+            }
+
+            .side-bar ul li a {
+                padding: 8px 30px;
+                display: block;
+                color: #000;
+            }
+
+            .side-bar ul li.dropdown li {
+                margin: 0;
+            }
+
+            .side-bar ul li.dropdown .dropdown-menu {
+                margin-top: 0;
+                min-width: 100%;
+            }
+
+.right-container {
+    padding-left: 270px;
+}
+
+.user-box:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+.user-box .date-requested {
+    padding-left: 30px;
 }

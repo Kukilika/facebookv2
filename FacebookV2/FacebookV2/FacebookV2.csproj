@@ -186,6 +186,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\UserSearchController.cs" />
     <Compile Include="Enums\FriendRequestStatusTypes.cs" />
     <Compile Include="Enums\GenderTypes.cs" />
     <Compile Include="Enums\PrivacyTypes.cs" />
@@ -251,6 +252,7 @@
     <Content Include="Scripts\app\editProfile.js" />
     <Content Include="Scripts\app\friendRequests.js" />
     <Content Include="Scripts\app\friendView.js" />
+    <Content Include="Scripts\app\searchBar.js" />
     <Content Include="Scripts\app\showProfile.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -314,6 +316,7 @@
     <Folder Include="Views\Base\" />
     <Folder Include="Views\City\" />
     <Folder Include="Views\Photo\" />
+    <Folder Include="Views\UserSearch\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
