@@ -3,7 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 using System.Web.Mvc;
+using FacebookV2.Enums;
+using Microsoft.AspNet.Identity;
+using FacebookV2.App_Start;
+using System.IO;
 
 namespace FacebookV2.Controllers
 {
@@ -21,12 +26,36 @@ namespace FacebookV2.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("NO SE PUEDE");
                 return View("ErrorView");
             }
             return View();
         }
 
+        [NonAction]
+        public IEnumerable<SelectListItem> GetAllCitiesFromCounty(int? countyId)
+        {
+            var cities = db.Cities
+                            .Where(c => c.CountyId == countyId)
+                            .ToList();
+
+            return cities.Select(c => new SelectListItem
+            {
+                Text = c.Name,
+                Value = c.Id.ToString()
+            });
+        }
+
+        [NonAction]
+        public IEnumerable<SelectListItem> GetAllCounties()
+        {
+            var counties = db.Counties.ToList();
+
+            return counties.Select(c => new SelectListItem
+            {
+                Text = c.Name,
+                Value = c.Id.ToString()
+            });
+        }
 
         // GET: UserAdmin
         public ActionResult Index()
@@ -39,12 +68,12 @@ namespace FacebookV2.Controllers
             return View();
         }
 
-        public ActionResult New()
+        /*public ActionResult New()
         {
-            return View();
-        }
+            return View("~/Views/Profile/Create.cshtml");
+        }*/
 
-        //Post
+        /*//Post
         [HttpPost]
         public ActionResult New(Profile profile)
         {
@@ -58,15 +87,16 @@ namespace FacebookV2.Controllers
             {
                 return View("ErrorView");
             }
-        }
+        }*/
 
         [HttpDelete]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(String id)
         {
             try
             {
                 Profile profile = db.Profiles.Find(id);
-                profile.IsDeletedByAdmin = true;
+                //profile.IsDeletedByAdmin = true;
+                db.Profiles.Remove(profile);
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -76,21 +106,95 @@ namespace FacebookV2.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(String id)
         {
-            try
+            var user = db.Profiles
+                    .Include(p => p.County)
+                    .Include(p => p.City)
+                    .Include(p => p.Albums)
+                    .Where(p => p.Id == id)
+                    .FirstOrDefault();
+
+            if (user == null)
+                return View("NotFound");
+
+            var model = new EditProfileViewModel()
             {
-                Profile profile = db.Profiles.Find(id);
-                ViewBag.Category = profile;
-            }
-            catch (Exception e)
-            {
-                return View("ErrorView");
-            }
-            return View();
+                Id = id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Birthday = user.Birthday,
+                IsMale = user.IsMale,
+                IsPublic = user.IsPublic,
+                CountyId = user.CountyId,
+                CityId = user.CityId
+            };
+
+            model.Counties = GetAllCounties().ToList();
+            if (user.CountyId != null)
+                model.Cities = GetAllCitiesFromCounty(user.CountyId).ToList();
+
+            return View("~/Views/Profile/Edit.cshtml", model);
         }
 
         [HttpPut]
+        public ActionResult Edit(EditProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Counties = GetAllCounties().ToList();
+
+                if (model.CityId != null)
+                {
+                    model.CityId = null;
+                }
+
+                return View(model);
+            }
+
+            var profileToEdit = db.Profiles.Find(model.Id);
+            if (model.Birthday == null)
+                model.Birthday = profileToEdit.Birthday;
+
+            if (model.ProfilePhoto != null)
+            {
+                MemoryStream target = new MemoryStream();
+                model.ProfilePhoto.InputStream.CopyTo(target);
+                byte[] data = target.ToArray();
+
+                var newPhotoToAdd = new Photo()
+                {
+                    Content = data,
+                    ProfileId = model.Id
+                };
+
+                db.Photos.Add(newPhotoToAdd);
+                db.SaveChanges();
+
+                if (TryUpdateModel(profileToEdit))
+                {
+                    profileToEdit.ProfilePhotoId = newPhotoToAdd.Id;
+                    db.SaveChanges();
+                }
+            }
+
+            if (TryUpdateModel(profileToEdit))
+            {
+                profileToEdit.FirstName = model.FirstName;
+                profileToEdit.LastName = model.LastName;
+                profileToEdit.IsMale = model.IsMale;
+                profileToEdit.IsPublic = model.IsPublic;
+                profileToEdit.Birthday = model.Birthday;
+                profileToEdit.CountyId = model.CountyId;
+                profileToEdit.CityId = model.CityId;
+
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Show", "Profile", new { userId = profileToEdit.Id });
+        }
+
+        /*[HttpPut]
         public ActionResult Edit(int id, Profile requestProfile)
         {
             try
@@ -108,6 +212,6 @@ namespace FacebookV2.Controllers
             {
                 return View("ErrorView");
             }
-        }
+        }*/
     }
 }

@@ -7,14 +7,17 @@
 
 @foreach (var profile in ViewBag.Profiles)
 {
-    <p>@profile.FirstName</p>
+    <p>Id : @profile.Id</p>
+    <p>First Name:  @profile.FirstName</p>
     //<a href="/Categories/Show/@category.CategoryId">Afisare categorie</a>
     <br />
-    <p>@profile.LastName</p>
+    <p>Last Name:  @profile.LastName</p>
     <br />
-    <p>@profile.IsPublic</p>
+    <p>Is profile public:  @profile.IsPublic</p>
     <br />
-    <p>@profile.IsDeletedByAdmin</p>
+    <p>Is profile deleted by admin : @profile.IsDeletedByAdmin</p>
+    <a href="/UserAdmin/Edit/@profile.Id">Editeaza acest profil</a>
     <hr />
     <br />
+    
 }
