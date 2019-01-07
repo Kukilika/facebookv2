@@ -3,13 +3,13 @@
     font-size: 16px;
     color: darkcyan;
     margin: 10px 25px;
-    position: absolute;
+    position: relative;
 }
 
 .user-box img {
     float: left;
     width: 130px;
-    height: 120px;
+    height: 150px;
     object-fit: cover;
 }
 
@@ -20,8 +20,8 @@
 
 .friend-button {
     position: absolute;
-    right: 10%;
-    bottom: 10%;
+    right: 30%;
+    /*bottom: 10%;*/
 }
 
 .edit-title {
@@ -29,6 +29,7 @@
     font-size: 15px;
     color: #134545;
     margin: 30px 0 20px 30px;
+    clear: both;
 }
 
 .contact-info .form-group label:first-child {
@@ -49,30 +50,6 @@
 .contact-info {
     margin: 15px;
 }
-
-#interests {
-    font-weight: lighter;
-    color: #1b7a81;
-    display: inline-block;
-    width: 10%;
-    margin: 15px;
-}
-
-.interests-list {
-    display: inline-block;
-}
-
-    .interests-list span {
-        display: inline-block;
-        padding: 5px;
-        background-color: rgba(164, 243, 243, 0.41);
-        border-radius: 15%;
-        border: 1px solid #4da6c3;
-        font-weight: lighter;
-        color: #0f4d51;
-        font-style: oblique;
-        margin: 3px;
-    }
 
 
 
@@ -140,6 +117,6 @@
     font-style: oblique;
 }
 
-.interests-box {
+/*.interests-box {
     display: flex;
-}
+}*/
