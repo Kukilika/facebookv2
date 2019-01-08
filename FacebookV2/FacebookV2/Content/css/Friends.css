@@ -28,6 +28,7 @@
     height: auto;
     overflow: auto;
     margin-bottom: 15px;
+    width: 50%;
 }
 
     .friend-requests .user-box .userName {

@@ -32,9 +32,9 @@ namespace FacebookV2.Controllers
                                                 || f.ReceiverId == userId && f.SenderId == currentUserId);
 
             if (!picture.Profile.IsPublic
-                    && isFriendWith
+                    && !isFriendWith
                     && picture.Id != picture.Profile.ProfilePhotoId
-                    && currentUserId != userId)
+                    /*&& currentUserId != userId*/)
                 return false;
 
             return true;
