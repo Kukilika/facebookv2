@@ -17,19 +17,44 @@ namespace FacebookV2.Controllers
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
 
-        public ActionResult Show(int id)
+        public ActionResult Show(string userId)
         {
-            try
+            var user = db.Profiles
+                    .Include(p => p.County)
+                    .Include(p => p.City)
+                    .Include(p => p.Albums)
+                    .Where(p => p.Id == userId)
+                    .FirstOrDefault();
+            if (user == null)
             {
-                Profile profile = db.Profiles.Find(id);
-                ViewBag.Category = profile;
+                return View("NotFound");
             }
-            catch (Exception e)
+
+            var model = new ShowProfileViewModel();
+
+            model.Id = user.Id;
+            model.FirstName = user.FirstName;
+            model.LastName = user.LastName;
+            model.ProfilePhotoId = user.ProfilePhotoId;
+            model.CountyName = user.County != null ? user.County.Name : "Not available";
+            model.CityName = user.City != null ? user.City.Name : "Not available";
+            model.GenderType = user.IsMale ? "Male" : "Female";
+            model.Birthdate = user.Birthday;
+            model.IsAvailableToView = true;
+
+            foreach (var album in model.Albums)
             {
-                return View("ErrorView");
+                album.FirstPhotoId = db.Photos.Where(u => u.AlbumId == album.Id)
+                                              .Select(u => u.Id)
+                                              .FirstOrDefault();
+                album.NumberOfPhotos = db.Photos.Where(u => u.AlbumId == album.Id)
+                                                .Count();
             }
-            return View();
+
+            return View("~/Views/Profile/Show.cshtml", model);
+
         }
+
 
         [NonAction]
         public IEnumerable<SelectListItem> GetAllCitiesFromCounty(int? countyId)
@@ -58,6 +83,7 @@ namespace FacebookV2.Controllers
         }
 
         // GET: UserAdmin
+        [HttpGet]
         public ActionResult Index()
         {
             
@@ -89,14 +115,41 @@ namespace FacebookV2.Controllers
             }
         }*/
 
-        [HttpDelete]
+        /*Dintrun anumit motiv Delete merge doar cu get*/
+        [HttpGet]
+        public ActionResult Undelete(String id)
+        {
+            try
+            {
+                Profile profile = db.Profiles.Find(id);
+                if(profile.IsDeletedByAdmin == false)
+                {
+                    return View("AlreadyStatus");
+                }
+                profile.IsDeletedByAdmin = false;
+                //db.Profiles.Remove(profile);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return View("ErrorView");
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpGet]
         public ActionResult Delete(String id)
         {
             try
             {
                 Profile profile = db.Profiles.Find(id);
-                //profile.IsDeletedByAdmin = true;
-                db.Profiles.Remove(profile);
+                if (profile.IsDeletedByAdmin == true)
+                {
+                    return View("AlreadyStatus");
+                }
+                profile.IsDeletedByAdmin = true;
+                //db.Profiles.Remove(profile);
                 db.SaveChanges();
             }
             catch (Exception e)

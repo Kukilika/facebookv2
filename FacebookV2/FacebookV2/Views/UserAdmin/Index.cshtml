@@ -17,7 +17,13 @@
     <br />
     <p>Is profile deleted by admin : @profile.IsDeletedByAdmin</p>
     <a href="/UserAdmin/Edit/@profile.Id">Editeaza acest profil</a>
+    <br />
+    <a href="/UserAdmin/Undelete/@profile.Id">Marcheaza acest profil ca fiind normal</a>
+    <br />
+    <a href="/UserAdmin/Show?userId=@profile.Id">Arata informatiile complete</a>
+    <br />
+    <a href="/UserAdmin/Delete/@profile.Id">Marcheaza acest profil ca fiind sters de catre admin</a>
     <hr />
     <br />
-    
+
 }
