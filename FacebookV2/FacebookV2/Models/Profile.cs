@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -43,4 +44,11 @@ namespace FacebookV2.Models
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
     }
+    /*
+    public class ProfileDBContext : DbContext
+    {
+        public ProfileDBContext() : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=aspnet-FacebookV2-20181226054138;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False") { }
+        public DbSet<Profile> Profiles { get; set; }
+    }*/
+
 }

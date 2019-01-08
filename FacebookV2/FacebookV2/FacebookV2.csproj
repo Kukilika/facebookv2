@@ -184,6 +184,7 @@
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UserSearchController.cs" />
@@ -193,29 +194,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901040011158_AllTables1.cs" />
-    <Compile Include="Migrations\201901040011158_AllTables1.Designer.cs">
-      <DependentUpon>201901040011158_AllTables1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041020556_Test.cs" />
-    <Compile Include="Migrations\201901041020556_Test.Designer.cs">
-      <DependentUpon>201901041020556_Test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041045255_Test2.cs" />
-    <Compile Include="Migrations\201901041045255_Test2.Designer.cs">
-      <DependentUpon>201901041045255_Test2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041048470_Test3.cs" />
-    <Compile Include="Migrations\201901041048470_Test3.Designer.cs">
-      <DependentUpon>201901041048470_Test3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041103478_RemovedPhotoFromProfile.cs" />
-    <Compile Include="Migrations\201901041103478_RemovedPhotoFromProfile.Designer.cs">
-      <DependentUpon>201901041103478_RemovedPhotoFromProfile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901041136224_MadeNullabelProfilePhoto.cs" />
-    <Compile Include="Migrations\201901041136224_MadeNullabelProfilePhoto.Designer.cs">
-      <DependentUpon>201901041136224_MadeNullabelProfilePhoto.cs</DependentUpon>
+    <Compile Include="Migrations\201901051438277_ceva.cs" />
+    <Compile Include="Migrations\201901051438277_ceva.Designer.cs">
+      <DependentUpon>201901051438277_ceva.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -308,6 +289,11 @@
     <Content Include="Views\Shared\InternalServerError.cshtml" />
     <Content Include="Views\Shared\InvalidInputView.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\UserAdmin\Index.cshtml" />
+    <Content Include="Views\UserAdmin\Show.cshtml" />
+    <Content Include="Views\UserAdmin\ErrorView.cshtml" />
+    <Content Include="Views\UserAdmin\Edit.cshtml" />
+    <Content Include="Views\UserAdmin\New.cshtml" />
     <Content Include="Views\Profile\Show.cshtml" />
     <Content Include="Views\Shared\_AlbumView.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
@@ -339,23 +325,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901040011158_AllTables1.resx">
-      <DependentUpon>201901040011158_AllTables1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041020556_Test.resx">
-      <DependentUpon>201901041020556_Test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041045255_Test2.resx">
-      <DependentUpon>201901041045255_Test2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041048470_Test3.resx">
-      <DependentUpon>201901041048470_Test3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041103478_RemovedPhotoFromProfile.resx">
-      <DependentUpon>201901041103478_RemovedPhotoFromProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901041136224_MadeNullabelProfilePhoto.resx">
-      <DependentUpon>201901041136224_MadeNullabelProfilePhoto.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901051438277_ceva.resx">
+      <DependentUpon>201901051438277_ceva.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -391,6 +362,13 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

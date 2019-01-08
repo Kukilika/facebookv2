@@ -3,7 +3,7 @@ namespace FacebookV2.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AllTables1 : DbMigration
+    public partial class ceva : DbMigration
     {
         public override void Up()
         {
@@ -27,16 +27,13 @@ namespace FacebookV2.Migrations
                         AlbumId = c.Long(),
                         Caption = c.String(maxLength: 300),
                         Content = c.Binary(nullable: false),
-                        ProfileId = c.String(maxLength: 128),
-                        Profile_Id = c.String(maxLength: 128),
+                        ProfileId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Albums", t => t.AlbumId)
-                .ForeignKey("dbo.Profiles", t => t.Profile_Id)
-                .ForeignKey("dbo.Profiles", t => t.ProfileId)
+                .ForeignKey("dbo.Profiles", t => t.ProfileId, cascadeDelete: true)
                 .Index(t => t.AlbumId)
-                .Index(t => t.ProfileId)
-                .Index(t => t.Profile_Id);
+                .Index(t => t.ProfileId);
             
             CreateTable(
                 "dbo.Comments",
@@ -47,11 +44,11 @@ namespace FacebookV2.Migrations
                         CreatedOn = c.DateTime(nullable: false),
                         Status = c.Byte(nullable: false),
                         PhotoId = c.Long(nullable: false),
-                        ProfileId = c.String(maxLength: 128),
+                        ProfileId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Photos", t => t.PhotoId)
-                .ForeignKey("dbo.Profiles", t => t.ProfileId)
+                .ForeignKey("dbo.Photos", t => t.PhotoId, cascadeDelete: true)
+                .ForeignKey("dbo.Profiles", t => t.ProfileId, cascadeDelete: false)
                 .Index(t => t.PhotoId)
                 .Index(t => t.ProfileId);
             
@@ -65,23 +62,18 @@ namespace FacebookV2.Migrations
                         IsMale = c.Boolean(nullable: false),
                         IsPublic = c.Boolean(nullable: false),
                         IsDeletedByAdmin = c.Boolean(nullable: false),
+                        ProfilePhotoId = c.Long(),
                         Birthday = c.DateTime(),
                         CityId = c.Int(),
                         CountyId = c.Int(),
-                        ProfilePhotoId = c.Long(),
-                        Group_Id = c.Long(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Counties", t => t.CountyId)
                 .ForeignKey("dbo.Cities", t => t.CityId)
-                .ForeignKey("dbo.Groups", t => t.Group_Id)
-                .ForeignKey("dbo.Photos", t => t.ProfilePhotoId)
                 .ForeignKey("dbo.AspNetUsers", t => t.Id)
                 .Index(t => t.Id)
                 .Index(t => t.CityId)
-                .Index(t => t.CountyId)
-                .Index(t => t.ProfilePhotoId)
-                .Index(t => t.Group_Id);
+                .Index(t => t.CountyId);
             
             CreateTable(
                 "dbo.Cities",
@@ -92,7 +84,7 @@ namespace FacebookV2.Migrations
                         Name = c.String(nullable: false, maxLength: 100),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Counties", t => t.CountyId)
+                .ForeignKey("dbo.Counties", t => t.CountyId, cascadeDelete: true)
                 .Index(t => t.CountyId);
             
             CreateTable(
@@ -143,13 +135,10 @@ namespace FacebookV2.Migrations
                         Name = c.String(nullable: false, maxLength: 150),
                         Description = c.String(nullable: false),
                         CreatedDate = c.DateTime(nullable: false),
-                        Profile_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Profiles", t => t.AdminId)
-                .ForeignKey("dbo.Profiles", t => t.Profile_Id)
-                .Index(t => t.AdminId)
-                .Index(t => t.Profile_Id);
+                .ForeignKey("dbo.Profiles", t => t.AdminId, cascadeDelete: true)
+                .Index(t => t.AdminId);
             
             CreateTable(
                 "dbo.Messages",
@@ -161,8 +150,8 @@ namespace FacebookV2.Migrations
                         CreatedDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => new { t.ProfileId, t.GroupId })
-                .ForeignKey("dbo.Groups", t => t.GroupId)
-                .ForeignKey("dbo.Profiles", t => t.ProfileId)
+                .ForeignKey("dbo.Groups", t => t.GroupId, cascadeDelete: true)
+                .ForeignKey("dbo.Profiles", t => t.ProfileId, cascadeDelete: false)
                 .Index(t => t.ProfileId)
                 .Index(t => t.GroupId);
             
@@ -173,99 +162,110 @@ namespace FacebookV2.Migrations
                         Id = c.Long(nullable: false, identity: true),
                         CreatedOn = c.DateTime(nullable: false),
                         PhotoId = c.Long(nullable: false),
-                        ProfileId = c.String(maxLength: 128),
+                        ProfileId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Photos", t => t.PhotoId)
-                .ForeignKey("dbo.Profiles", t => t.ProfileId)
+                .ForeignKey("dbo.Photos", t => t.PhotoId, cascadeDelete: true)
+                .ForeignKey("dbo.Profiles", t => t.ProfileId, cascadeDelete: false)
                 .Index(t => t.PhotoId)
                 .Index(t => t.ProfileId);
             
-            //CreateTable(
-            //    "dbo.AspNetUsers",
-            //    c => new
-            //        {
-            //            Id = c.String(nullable: false, maxLength: 128),
-            //            CreatedDate = c.DateTime(nullable: false),
-            //            Email = c.String(maxLength: 256),
-            //            EmailConfirmed = c.Boolean(nullable: false),
-            //            PasswordHash = c.String(),
-            //            SecurityStamp = c.String(),
-            //            PhoneNumber = c.String(),
-            //            PhoneNumberConfirmed = c.Boolean(nullable: false),
-            //            TwoFactorEnabled = c.Boolean(nullable: false),
-            //            LockoutEndDateUtc = c.DateTime(),
-            //            LockoutEnabled = c.Boolean(nullable: false),
-            //            AccessFailedCount = c.Int(nullable: false),
-            //            UserName = c.String(nullable: false, maxLength: 256),
-            //        })
-            //    .PrimaryKey(t => t.Id)
-            //    .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+            /*CreateTable(
+                "dbo.AspNetUsers",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        CreatedDate = c.DateTime(nullable: false),
+                        Email = c.String(maxLength: 256),
+                        EmailConfirmed = c.Boolean(nullable: false),
+                        PasswordHash = c.String(),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
+                        UserName = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
-            //CreateTable(
-            //    "dbo.AspNetUserClaims",
-            //    c => new
-            //        {
-            //            Id = c.Int(nullable: false, identity: true),
-            //            UserId = c.String(nullable: false, maxLength: 128),
-            //            ClaimType = c.String(),
-            //            ClaimValue = c.String(),
-            //        })
-            //    .PrimaryKey(t => t.Id)
-            //    .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-            //    .Index(t => t.UserId);
+            CreateTable(
+                "dbo.AspNetUserClaims",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        ClaimType = c.String(),
+                        ClaimValue = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
             
-            //CreateTable(
-            //    "dbo.AspNetUserLogins",
-            //    c => new
-            //        {
-            //            LoginProvider = c.String(nullable: false, maxLength: 128),
-            //            ProviderKey = c.String(nullable: false, maxLength: 128),
-            //            UserId = c.String(nullable: false, maxLength: 128),
-            //        })
-            //    .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-            //    .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-            //    .Index(t => t.UserId);
+            CreateTable(
+                "dbo.AspNetUserLogins",
+                c => new
+                    {
+                        LoginProvider = c.String(nullable: false, maxLength: 128),
+                        ProviderKey = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
             
-            //CreateTable(
-            //    "dbo.AspNetUserRoles",
-            //    c => new
-            //        {
-            //            UserId = c.String(nullable: false, maxLength: 128),
-            //            RoleId = c.String(nullable: false, maxLength: 128),
-            //        })
-            //    .PrimaryKey(t => new { t.UserId, t.RoleId })
-            //    .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-            //    .ForeignKey("dbo.AspNetRoles", t => t.RoleId)
-            //    .Index(t => t.UserId)
-            //    .Index(t => t.RoleId);
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
             
-            //CreateTable(
-            //    "dbo.AspNetRoles",
-            //    c => new
-            //        {
-            //            Id = c.String(nullable: false, maxLength: 128),
-            //            Name = c.String(nullable: false, maxLength: 256),
-            //        })
-            //    .PrimaryKey(t => t.Id)
-            //    .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            */
+            CreateTable(
+                "dbo.GroupProfiles",
+                c => new
+                    {
+                        GroupId = c.Long(nullable: false),
+                        ProfileId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.GroupId, t.ProfileId })
+                .ForeignKey("dbo.Groups", t => t.GroupId, cascadeDelete: true)
+                .ForeignKey("dbo.Profiles", t => t.ProfileId, cascadeDelete: false)
+                .Index(t => t.GroupId)
+                .Index(t => t.ProfileId);
             
         }
         
         public override void Down()
         {
             //DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Photos", "ProfileId", "dbo.Profiles");
             DropForeignKey("dbo.Profiles", "Id", "dbo.AspNetUsers");
             //DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             //DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             //DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Profiles", "ProfilePhotoId", "dbo.Photos");
-            DropForeignKey("dbo.Photos", "Profile_Id", "dbo.Profiles");
+            DropForeignKey("dbo.Photos", "ProfileId", "dbo.Profiles");
             DropForeignKey("dbo.Likes", "ProfileId", "dbo.Profiles");
             DropForeignKey("dbo.Likes", "PhotoId", "dbo.Photos");
-            DropForeignKey("dbo.Groups", "Profile_Id", "dbo.Profiles");
-            DropForeignKey("dbo.Profiles", "Group_Id", "dbo.Groups");
+            DropForeignKey("dbo.GroupProfiles", "ProfileId", "dbo.Profiles");
+            DropForeignKey("dbo.GroupProfiles", "GroupId", "dbo.Groups");
             DropForeignKey("dbo.Messages", "ProfileId", "dbo.Profiles");
             DropForeignKey("dbo.Messages", "GroupId", "dbo.Groups");
             DropForeignKey("dbo.Groups", "AdminId", "dbo.Profiles");
@@ -280,8 +280,10 @@ namespace FacebookV2.Migrations
             DropForeignKey("dbo.Albums", "ProfileId", "dbo.Profiles");
             DropForeignKey("dbo.Comments", "PhotoId", "dbo.Photos");
             DropForeignKey("dbo.Photos", "AlbumId", "dbo.Albums");
-            //DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            //DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.GroupProfiles", new[] { "ProfileId" });
+            DropIndex("dbo.GroupProfiles", new[] { "GroupId" });
+           // DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+           // DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             //DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             //DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             //DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
@@ -290,24 +292,21 @@ namespace FacebookV2.Migrations
             DropIndex("dbo.Likes", new[] { "PhotoId" });
             DropIndex("dbo.Messages", new[] { "GroupId" });
             DropIndex("dbo.Messages", new[] { "ProfileId" });
-            DropIndex("dbo.Groups", new[] { "Profile_Id" });
             DropIndex("dbo.Groups", new[] { "AdminId" });
             DropIndex("dbo.Friends", new[] { "SecondUserId" });
             DropIndex("dbo.Friends", new[] { "FirstUserId" });
             DropIndex("dbo.FriendRequests", new[] { "RequestedProfileId" });
             DropIndex("dbo.FriendRequests", new[] { "RequesterProfileId" });
             DropIndex("dbo.Cities", new[] { "CountyId" });
-            DropIndex("dbo.Profiles", new[] { "Group_Id" });
-            DropIndex("dbo.Profiles", new[] { "ProfilePhotoId" });
             DropIndex("dbo.Profiles", new[] { "CountyId" });
             DropIndex("dbo.Profiles", new[] { "CityId" });
             DropIndex("dbo.Profiles", new[] { "Id" });
             DropIndex("dbo.Comments", new[] { "ProfileId" });
             DropIndex("dbo.Comments", new[] { "PhotoId" });
-            DropIndex("dbo.Photos", new[] { "Profile_Id" });
             DropIndex("dbo.Photos", new[] { "ProfileId" });
             DropIndex("dbo.Photos", new[] { "AlbumId" });
             DropIndex("dbo.Albums", new[] { "ProfileId" });
+            DropTable("dbo.GroupProfiles");
             //DropTable("dbo.AspNetRoles");
             //DropTable("dbo.AspNetUserRoles");
             //DropTable("dbo.AspNetUserLogins");

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editare profil</h2>
+<form method="post" action="/UserAdmin/Edit/@ViewBag.Profile.Id">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <label>Nume profil</label>
+    <br />
+    <input type="text" name="FirstName" value="@ViewBag.Profile.FirstName" />
+    <br />
+    <input type="text" name="LastName" value="@ViewBag.Profile.LastName" />
+    <br />
+    <button type="submit">Modifica aceast profil</button>
+</form>
