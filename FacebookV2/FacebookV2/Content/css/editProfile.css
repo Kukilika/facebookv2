@@ -21,13 +21,14 @@ label {
     margin-left: 2%;
 }
 
-.edit-contact{
+.edit-contact {
     width: 45%;
     display: inline-block;
+    vertical-align: top;
 }
 
-.form-control{
-    display:inline;
+.form-control {
+    display: inline;
     width: 50%;
 }
 
@@ -36,25 +37,25 @@ label {
     font-weight: lighter;
 }
 
-.privacy-option{
-    display:block;
+.privacy-option {
+    display: block;
 }
 
-.privacy-option label{
-    width: 8%;
-    color: #555;
-}
+    .privacy-option label {
+        width: 7%;
+        color: #555;
+    }
 
-input[type="radio"]{
+input[type="radio"] {
     margin-right: 5px;
 }
 
 input[type="file"] {
-    display:inline;
+    display: inline;
 }
 
-.edit-picture label{
-    width: 20%;
+.edit-picture label {
+    width: 25%;
     color: #555;
 }
 

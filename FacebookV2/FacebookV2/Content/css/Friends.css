@@ -28,6 +28,7 @@
     height: auto;
     overflow: auto;
     margin-bottom: 15px;
+    width: 50%;
 }
 
     .friend-requests .user-box .userName {
@@ -51,6 +52,8 @@
 
 .friends .user-box {
     margin-bottom: 10px;
+    display: inline-block;
+    width: 50%;
 }
 
     .friends .user-box img {

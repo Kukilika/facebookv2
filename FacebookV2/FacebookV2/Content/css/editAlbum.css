@@ -1,0 +1,150 @@
+﻿.albumPhoto img {
+    height: 100px;
+    width: auto;
+}
+
+.edit-title {
+    font-weight: bold;
+    font-size: 16px;
+    color: darkcyan;
+    margin: 15px;
+}
+
+.edit-album-header {
+    margin-left: 15px;
+}
+
+.photo-caption {
+    display: inline-block;
+}
+
+#photos {
+    margin-top: 50px;
+}
+
+.albumPhoto {
+    border: 1px solid #4da6c3;
+    margin: 15px;
+    padding: 10px;
+    background-color: rgba(240, 255, 255, 0.4);
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+    .albumPhoto .albumCaption {
+        padding: 0 10px 0 30px;
+        color: darkcyan;
+        font-weight: 500;
+        font-size: 14px;
+        font-style: italic;
+    }
+
+    .albumPhoto > img {
+        width: 125px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .albumPhoto .delete {
+        margin-left: 10px;
+    }
+
+.form-control {
+    display: inline-block;
+    width: 80%;
+    margin-left: 10px;
+}
+
+.form-group label {
+    font-weight: 500;
+    font-size: 14px;
+    color: darkcyan;
+    margin: 10px 0;
+}
+
+input[type="submit"] {
+    margin: 0px 0px 0px 30px !important;
+    /*float: right;*/
+}
+
+.add-album {
+    margin: 15px;
+}
+
+    .add-album .form-control {
+        width: 80%;
+    }
+
+.add-album-name {
+    margin-left: 15px;
+}
+
+.submit-new-album {
+    margin: 3px 0 0 0 !important;
+}
+
+.album-summary {
+    display: inline-block;
+    width: 25%;
+}
+
+.view-album-name {
+    color: darkcyan;
+    font-weight: 500;
+    font-size: 14px;
+    font-style: italic;
+    margin-left: 15px;
+}
+
+.view-album-photo .albumPhoto > img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    margin: auto;
+}
+
+.view-album-photo .albumPhoto {
+    margin-top: 5px;
+}
+
+.albumBottom {
+    margin: -15px 15px 0;
+    padding: 5px 10px;
+    background: #dcf2f2;
+    border: 1px solid #4da6c3;
+    border-top: none;
+}
+
+.view-album-photo {
+    position: relative;
+}
+
+    .view-album-photo .btn.delete {
+        position: absolute;
+        top: -7px;
+        right: 5px;
+        border-radius: 50%;
+        padding: 4px;
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
+    }
+
+.photos-number {
+    color: darkcyan;
+    font-weight: 500;
+    font-size: 12px;
+    font-style: oblique;
+}
+
+.view-album-photo .btn.edit {
+    float: right;
+    background-color: Transparent;
+    height: 25px;
+    width: 40px;
+    font-size: 12px;
+    padding: 0;
+    font-style: oblique;
+    color: darkcyan;
+}

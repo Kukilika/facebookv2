@@ -2,14 +2,14 @@
 @using FacebookV2.Enums
 
 
-<link href="~/Contet/css/editProfile.css" rel="stylesheet" />
+<link href="~/Content/css/editProfile.css" rel="stylesheet" />
 
 @{
     ViewData["Title"] = "Edit Profile";
 }
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form action="/Profile/Edit" method="post" enctype="multipart/form-data">
             @Html.HttpMethodOverride(HttpVerbs.Put)
             @Html.HiddenFor(m => m.Id)
