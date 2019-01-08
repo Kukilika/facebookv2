@@ -59,7 +59,6 @@ namespace FacebookV2.Controllers
             }
             else
             {
-                //model = mapper.Map<ViewProfileVm>(user);
                 model.Id = user.Id;
                 model.FirstName = user.FirstName;
                 model.LastName = user.LastName;
@@ -68,17 +67,26 @@ namespace FacebookV2.Controllers
                 model.CityName = user.City != null ? user.City.Name : "Not available";
                 model.GenderType = user.IsMale ? "Male" : "Female";
                 model.Birthdate = user.Birthday;
+                model.Albums = user.Albums.Select(album => new ShowAlbumViewModel
+                                                        {
+                                                            Id = album.Id,
+                                                            Name = album.Name,
+                                                            NumberOfPhotos = album.Photos.Count,
+                                                            FirstPhotoId = album.Photos.FirstOrDefault()?.Id,
+                                                            IsEditable = false
+                                                        })
+                                                        .ToList();
 
                 model.IsAvailableToView = true;
 
-                foreach (var album in model.Albums)
+                /*foreach (var album in model.Albums)
                 {
                     album.FirstPhotoId = db.Photos.Where(u => u.AlbumId == album.Id)
                                                   .Select(u => u.Id)
                                                   .FirstOrDefault();
                     album.NumberOfPhotos = db.Photos.Where(u => u.AlbumId == album.Id)
                                                     .Count();
-                }
+                }*/
             }
 
             var isPendingForUser = db.FriendRequests

@@ -26,8 +26,9 @@
                 <ul class="nav navbar-nav">
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("My Profile", "ShowMyProfile", "Profile", null, null)</li>
-                        <li>@Html.ActionLink("Edit Profile", "Edit", "Profile", null, null)</li>
+                        <li>@Html.ActionLink("My profile", "ShowMyProfile", "Profile", null, null)</li>
+                        <li>@Html.ActionLink("Edit profile", "Edit", "Profile", null, null)</li>
+                        <li>@Html.ActionLink("Edit photos", "Show", "Album", null, null)</li>
                         <li>@Html.ActionLink("Friends", "GetAll", "Friend", null, null)</li>
                     }
                 </ul>

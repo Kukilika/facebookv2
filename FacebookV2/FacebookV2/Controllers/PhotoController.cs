@@ -3,9 +3,11 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
+using FacebookV2.App_Start;
 
 namespace FacebookV2.Controllers
 {
+    [Authorize]
     public class PhotoController : Controller
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
@@ -38,6 +40,7 @@ namespace FacebookV2.Controllers
             return true;
         }
 
+        [NonAction]
         public byte[] GetProfilePictureContent(long? profilePictureId)
         {
             return db.Photos
@@ -46,6 +49,7 @@ namespace FacebookV2.Controllers
                         .FirstOrDefault();
         }
 
+        [HttpGet]
         public ActionResult GetProfilePicture(long? id)
         {
             if (!CanDownloadPicture(id))

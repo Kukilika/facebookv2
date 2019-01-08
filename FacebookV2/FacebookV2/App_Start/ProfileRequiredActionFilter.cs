@@ -18,7 +18,7 @@ namespace FacebookV2.App_Start
 
             if (filterContext.HttpContext.User.Identity.IsAuthenticated
                     && !filterContext.ActionDescriptor.GetCustomAttributes(typeof(SkipMyGlobalActionFilterAttribute), false).Any()
-                    && !db.Profiles.Any(p => p.Id == currentUserId))
+                    && !db.Profiles.Where(p => p.Id == currentUserId).Any())
                 filterContext.Result = new RedirectResult("/Profile/Create");
 
         }

@@ -243,15 +243,18 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\editAlbum.css" />
     <Content Include="Content\css\Friends.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\createProfile.js" />
+    <Content Include="Scripts\app\editAlbum.js" />
     <Content Include="Scripts\app\editProfile.js" />
     <Content Include="Scripts\app\friendRequests.js" />
     <Content Include="Scripts\app\friendView.js" />
+    <Content Include="Scripts\app\managePhotos.js" />
     <Content Include="Scripts\app\searchBar.js" />
     <Content Include="Scripts\app\showProfile.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -267,7 +270,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -308,11 +313,12 @@
     <Content Include="Views\Profile\Create.cshtml" />
     <Content Include="Views\Friend\GetAll.cshtml" />
     <Content Include="Views\Shared\_FriendView.cshtml" />
+    <Content Include="Views\Album\Show.cshtml" />
+    <Content Include="Views\Album\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
-    <Folder Include="Views\Album\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\City\" />
     <Folder Include="Views\Photo\" />

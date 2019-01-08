@@ -51,6 +51,8 @@
 
 .friends .user-box {
     margin-bottom: 10px;
+    display: inline-block;
+    width: 50%;
 }
 
     .friends .user-box img {
