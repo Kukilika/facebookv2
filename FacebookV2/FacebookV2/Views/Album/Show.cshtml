@@ -1,0 +1,38 @@
+﻿@model FacebookV2.Models.EditPhotosViewModel
+<link href="~/Content/css/editAlbum.css" rel="stylesheet" />
+@{
+    ViewData["Title"] = "Edit photos";
+}
+
+<p class="edit-title">Create new album</p>
+<div class="row">
+    <div class="col-md-12">
+        <form action="/Album/CreateAlbum" method="post" enctype="multipart/form-data">
+            @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+            <div class="add-album">
+                <div class="form-group">
+                    <label class="control-label add-album-name">Album name</label>
+                    <input name="Name" class="form-control" />
+                    @*@Html.ValidationMessage(Name, null, new { @class = "text-danger" })*@
+
+                    <input type="submit" value="Create" class="btn btn-default submit-new-album" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p class="edit-title">Your albums</p>
+<div>
+    @foreach (var album in Model.Albums)
+    {
+        <div class="album-summary">
+            @Html.Partial("_AlbumView", album)
+            <br />
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/app/managePhotos.js"></script>
+}
