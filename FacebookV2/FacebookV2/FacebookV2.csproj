@@ -184,11 +184,8 @@
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\FriendController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\GroupController.cs" />
-=======
     <Compile Include="Controllers\LikeController.cs" />
->>>>>>> 7ba7670c8f74c2d7e597323333f5925bff10298e
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
