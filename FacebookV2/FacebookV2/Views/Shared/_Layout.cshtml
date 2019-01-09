@@ -30,6 +30,7 @@
                         <li>@Html.ActionLink("Edit profile", "Edit", "Profile", null, null)</li>
                         <li>@Html.ActionLink("Edit photos", "Show", "Album", null, null)</li>
                         <li>@Html.ActionLink("Friends", "GetAll", "Friend", null, null)</li>
+                        <li>@Html.ActionLink("Groups","Index","Group",null,null)</li>
                     }
                 </ul>
                 @if (Request.IsAuthenticated)

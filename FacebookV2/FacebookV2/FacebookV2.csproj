@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\FriendController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
@@ -303,6 +304,8 @@
     <Content Include="Views\UserAdmin\AlreadyStatus.cshtml" />
     <Content Include="Views\Album\Show.cshtml" />
     <Content Include="Views\Album\Edit.cshtml" />
+    <Content Include="Views\Group\Index.cshtml" />
+    <Content Include="Views\Group\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
