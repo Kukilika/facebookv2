@@ -182,13 +182,19 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\FriendController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\GroupController.cs" />
+=======
+    <Compile Include="Controllers\LikeController.cs" />
+>>>>>>> 7ba7670c8f74c2d7e597323333f5925bff10298e
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UserSearchController.cs" />
+    <Compile Include="Enums\CommentStatusTypes.cs" />
     <Compile Include="Enums\FriendRequestStatusTypes.cs" />
     <Compile Include="Enums\GenderTypes.cs" />
     <Compile Include="Enums\PrivacyTypes.cs" />
@@ -205,6 +211,7 @@
     <Compile Include="Models\AlbumViewModels.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CommentViewModels.cs" />
     <Compile Include="Models\County.cs" />
     <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\FriendRequest.cs" />
@@ -227,6 +234,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\editAlbum.css" />
     <Content Include="Content\css\editProfile.css" />
+    <Content Include="Content\css\showDetailedAlbum.css" />
     <Content Include="Content\css\Friends.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -239,6 +247,7 @@
     <Content Include="Scripts\app\friendView.js" />
     <Content Include="Scripts\app\managePhotos.js" />
     <Content Include="Scripts\app\searchBar.js" />
+    <Content Include="Scripts\app\showDetailedAlbum.js" />
     <Content Include="Scripts\app\showProfile.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -306,12 +315,17 @@
     <Content Include="Views\Album\Edit.cshtml" />
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Group\New.cshtml" />
+    <Content Include="Views\Album\ShowPhotosFromAlbum.cshtml" />
+    <Content Include="Views\Shared\_PhotoView.cshtml" />
+    <Content Include="Views\Shared\_CommentView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\City\" />
+    <Folder Include="Views\Comment\" />
+    <Folder Include="Views\Like\" />
     <Folder Include="Views\Photo\" />
     <Folder Include="Views\UserSearch\" />
   </ItemGroup>
