@@ -31,6 +31,10 @@
                         <li>@Html.ActionLink("Edit photos", "Show", "Album", null, null)</li>
                         <li>@Html.ActionLink("Friends", "GetAll", "Friend", null, null)</li>
                     }
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink("Administrate app", "Index", "UserAdmin", null, null)</li>
+                    }
                 </ul>
                 @if (Request.IsAuthenticated)
                 {
