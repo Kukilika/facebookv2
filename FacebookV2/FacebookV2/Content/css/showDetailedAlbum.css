@@ -1,0 +1,99 @@
+﻿.post {
+    border: 1px ridge #4da6c3;
+    padding: 10px;
+    margin: 20px;
+}
+
+.post img {
+    float: left;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.post .user-box {
+    height: auto;
+}
+
+    .post .user-box .post-header {
+        margin-left: 110px;
+        padding-right: 70px;
+        position: relative;
+    }
+
+        .post .user-box .post-header .likeButton {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+.likeButton {
+    float: right;
+}
+
+.post .comments .comment-box {
+    height: auto;
+    border-bottom: 1px solid #4da6c3;
+    margin: 0 -10px;
+    padding: 5px 10px;
+}
+
+    .post .comments .comment-box:after {
+        display: block;
+        clear: both;
+        content: "";
+    }
+
+    .post .comments .comment-box img {
+        float: left;
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+    }
+
+    .post .comments .comment-box .userName {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        color: #1e7170;
+        line-height: 20px;
+        padding: 15px 5px 15px 10px;
+        cursor: pointer;
+    }
+
+.comment-like {
+    background-color: #dcf2f2;
+    /*margin: 0px -10px;*/
+    margin-bottom: 0px;
+    padding: 0px 10px;
+}
+
+    .comment-like span {
+        margin: 0 5px 0 10px;
+        color: #1b7a81;
+    }
+
+.post .moreComments {
+    margin: 5px 0;
+}
+
+.post .post-media {
+    margin: 5px 0;
+}
+
+    .post .post-media img {
+        max-width: 100%;
+        max-height: 400px;
+    }
+
+.post .comments-list + .addComment {
+    margin-top: 5px;
+}
+
+.add-photo-post {
+    display: inline-block;
+}
+
+label {
+    color: #1b7a81;
+}

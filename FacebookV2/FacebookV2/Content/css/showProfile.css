@@ -118,6 +118,10 @@
     font-style: oblique;
 }
 
-/*.interests-box {
-    display: flex;
-}*/
+.photo-media img{
+    float: left;
+    width: 130px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}

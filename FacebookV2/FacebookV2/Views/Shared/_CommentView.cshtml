@@ -1,0 +1,18 @@
+﻿@model FacebookV2.Models.CommentViewModel
+
+<div class="comment-box">
+    <img src="@Model.ProfilePhotoUrl" />
+    <label class="userName" userId="@Model.ProfileId">@Model.LastName @Model.FirstName: </label>
+
+    <span>
+        @Model.Body
+    </span>
+    <div class="albumBottom">
+        @if (Model.IsEditable == true)
+        {
+            <button type="button" class="btn btn-danger delete" data-delete-post-id="@Model.Id" style="float:right;">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        }
+    </div>
+</div>

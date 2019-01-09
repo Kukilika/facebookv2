@@ -44,6 +44,35 @@ namespace FacebookV2.Models
         public bool IsDeleted { get; set; }
     }
 
+    public class PhotoWithDetailsViewModel
+    {
+        public PhotoWithDetailsViewModel()
+        {
+            Comments = new List<CommentViewModel>();
+        }
+
+        public long Id { get; set; }
+        public long? AlbumId { get; set; }
+        public string Caption { get; set; }
+        public string ProfileId { get; set; }
+
+        public int LikesNumber { get; set; }
+        public int TotalCommentsNumber { get; set; }
+        public int NumberOfShowedComments => Comments.Count;
+        public bool IsLikedByCurrentUser { get; set; }
+
+        public List<CommentViewModel> Comments { get; set; }
+    }
+
+    public class ShowDetailedAlbumViewModel
+    {
+        public List<PhotoWithDetailsViewModel> Photos { get; set; }
+        public long Id { get; set; }
+        public int NumberOfPages { get; set; }
+        public int CurrentPage { get; set; }
+        public int MaxButtons { get; set; }
+    }
+
     public class EditAlbumViewModel : IValidatableObject
     {
         public EditAlbumViewModel()

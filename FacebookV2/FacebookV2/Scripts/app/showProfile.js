@@ -15,19 +15,22 @@ $(window).on('load', function () {
     $(".albumPhoto").click(function () {
         var hasPhotos = $(this).attr("data-no-photos");
         if (hasPhotos == 0) {
+            alert("Albumul nu are nicio poza !");
             return;
         }
 
         var albumId = $(this).attr("data-photo-post-id");
         var albumArea = this;
-        $.post("/Album/GetAlbum", { albumId: albumId })
-            .done(function (result) {
-                $("body").append(result);
-                document.getElementById('myModal').style.display = "block";
-                $("#myModal").show();
-            })
-            .fail(function () {
-                alert("An error has occured!");
-            });
+        window.location = "/Album/ShowPhotosFromAlbum?albumId=" + albumId.toString();
+
+        //$.post("/Album/ShowPhotosFromAlbum?albumId=" + albumId.toString())
+        //    .done(function (result) {
+        //        $("body").append(result);
+        //        document.getElementById('myModal').style.display = "block";
+        //        $("#myModal").show();
+        //    })
+        //    .fail(function () {
+        //        alert("An error has occured!");
+        //    });
     });
 }); 

@@ -1,0 +1,69 @@
+﻿@model FacebookV2.Models.PhotoWithDetailsViewModel
+@using FacebookV2.Enums
+
+@*<link href="~/Content/css/showProfile.css" rel="stylesheet" />*@
+
+@*<div class="user-box">
+    @if (Model.ProfilePhotoId != null)
+    {
+        <img src="/Media/GetProfilePicture/@Model.ProfilePhotoId" class="profilePicture" />
+    }
+    else
+    {
+        <img src="~/images/default_profilePicture.jpg" class="profilePicture" />
+    }*@
+<div class="post-header">
+    @*<span class="userName" userId="@Model.UserId">@Model.LastName @Model.FirstName:</span>
+        <span>@Model.Title</span>
+        <div class="date-requested"> @Model.CreatedOn.ToElapsedTime() </div>*@
+    <button type="button" data-like-post-id="@Model.Id" class="likeButton btn btn-default btn-sm">
+        <span class="@(Model.IsLikedByCurrentUser ? "glyphicon glyphicon-thumbs-down":"glyphicon glyphicon-thumbs-up") like-icon"></span>
+        <span class="like-text">@(Model.IsLikedByCurrentUser ? "Dislike" : "Like")</span>
+    </button>
+</div>
+<br />
+
+@*</div>*@
+
+<div>
+    <div class="post-content">
+        <div class="photo-media">
+            <img src="/Photo/GetProfilePicture/@Model.Id" class="postPicture" />
+        </div>
+        <div class="post-text">
+            <p>
+                @Model.Caption
+            </p>
+        </div>
+    </div>
+
+    <div class="comment-like">
+        <span>
+            <span class="glyphicon glyphicon-comment"></span>
+            <label data-commentLabel-post-id="@Model.Id">@Model.TotalCommentsNumber</label>
+            <label>comments</label>
+        </span>
+        <span>
+            <span class="glyphicon glyphicon-star-empty"></span>
+            <label data-likeLabel-post-id="@Model.Id">@Model.LikesNumber</label>
+            <label>likes</label>
+        </span>
+    </div>
+
+    <div class="comments">
+        <div class="comments-list" data-comment-post-id="@Model.Id">
+            @foreach (var comment in Model.Comments)
+            {
+                @Html.Partial("_CommentView", comment);
+            }
+        </div>
+        @if (Model.TotalCommentsNumber > Model.NumberOfShowedComments)
+        {
+            <div>
+                <button type="button" class="btn btn-info moreComments" data-showComments-post-id="@Model.Id">Show more comments ...</button>
+                <input type="hidden" asp-for="NumberOfShowedComments" data-numberOfComments-post-id="@Model.Id" />
+            </div>
+        }
+        <input type="text" value="Add comment..." class="addComment notChanged form-control" postId="@Model.Id" />
+    </div>
+</div>

@@ -1,5 +1,7 @@
 ﻿using FacebookV2.App_Start;
+using FacebookV2.Enums;
 using FacebookV2.Models;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -191,6 +193,83 @@ namespace FacebookV2.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult ShowPhotosFromAlbum(long albumId, int page = 1)
+        {
+            var currentUserId = User.Identity.GetUserId();
+
+            var numberOfPhotos = db.Photos.Where(p => p.AlbumId == albumId)
+                                          .ToList()
+                                          .Count;
+            var photosPerPage = 4;
+
+            var numberOfPages = numberOfPhotos / photosPerPage + 1; // 4 poze pe pagina
+            if (numberOfPhotos % photosPerPage == 0)
+                numberOfPages--;
+
+            if (page < 0)
+                return View("NotFound");
+
+            var photos = db.Photos.Include(p => p.Profile)
+                                  .Include(p => p.Album)
+                                  .Include(p => p.Likes)
+                                  .Include(p => p.Comments)
+                                  .Where(p => p.AlbumId == albumId)
+                                  .OrderBy(u => u.Id)
+                                  .Skip(((page - 1) * photosPerPage))
+                                  .Take(photosPerPage)
+                                  .ToList();
+            var commentsPerPost = 3;
+            //photos.ForEach(p => p.Comments = GetComments(p.Id, 0, commentsPerPost));
+
+            var photosModel = new List<PhotoWithDetailsViewModel>();
+            photos.ForEach(p =>
+            {
+                var photoModel = new PhotoWithDetailsViewModel()
+                {
+                    Id = p.Id,
+                    AlbumId = albumId,
+                    Caption = p.Caption,
+                    ProfileId = p.ProfileId,
+                    LikesNumber = p.Likes.Count,
+                    IsLikedByCurrentUser = IsLikedByCurrentUser(p.Id),
+                    TotalCommentsNumber = GetNumberOfCommentsForPhoto(p.Id),
+                };
+
+                photoModel.Comments = new List<CommentViewModel>();
+                p.Comments.ForEach(c =>
+                {
+                    var commentModel = new CommentViewModel()
+                    {
+                        Id = c.Id,
+                        PhotoId = c.PhotoId,
+                        Body = c.Body,
+                        CreatedOn = c.CreatedOn,
+                        IsEditable = (c.Status == (byte)CommentStatusTypes.Pending || c.ProfileId == currentUserId),
+                        FirstName = c.Profile.FirstName,
+                        LastName = c.Profile.LastName,
+                        ProfileId = c.Profile.Id,
+                        ProfilePhotoId = c.Profile.ProfilePhotoId
+                    };
+
+                    photoModel.Comments.Add(commentModel);
+                });
+
+                photosModel.Add(photoModel);
+            });
+
+            var model = new ShowDetailedAlbumViewModel()
+            {
+                Photos = photosModel,
+                Id = albumId,
+                NumberOfPages = numberOfPages,
+                CurrentPage = page,
+                MaxButtons = 5
+            };
+
+            return View(model);
+        }
+
         [NonAction]
         public List<Album> GetUserAlbums(string userId)
         {
@@ -239,6 +318,35 @@ namespace FacebookV2.Controllers
             {
                 Id = GetPictureById(photoToAdd.Id).Id
             });
+        }
+
+        [NonAction]
+        public List<Comment> GetComments(long photoId, int showedComments, int commentsToShow)
+        {
+            using (var dbNew = ApplicationDbContext.Create())
+            {
+                var comments = dbNew.Comments.Include(p => p.Profile)
+                                   .Where(u => u.PhotoId == photoId)
+                                   .OrderBy(u => u.CreatedOn)
+                                   .Skip(showedComments)
+                                   .Take(commentsToShow)
+                                   .ToList();
+                return comments;
+            }
+        }
+
+        [NonAction]
+        public bool IsLikedByCurrentUser(long photoId)
+        {
+            var currentUserId = User.Identity.GetUserId();
+
+            return db.Likes.Any(u => u.PhotoId == photoId && u.ProfileId == currentUserId);
+        }
+
+        [NonAction]
+        public int GetNumberOfCommentsForPhoto(long photoId)
+        {
+            return db.Comments.Count(u => u.PhotoId == photoId);
         }
     }
 }
