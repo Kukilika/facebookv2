@@ -1,0 +1,30 @@
+﻿@model FacebookV2.Models.ShowDetailedAlbumViewModel
+
+<link href="~/Content/css/showDetailedAlbum.css" rel="stylesheet" />
+
+@{
+    ViewData["Title"] = "Detailed album";
+}
+
+<div>
+    @foreach (var photo in Model.Photos)
+    {
+        <div class="post">
+            @Html.Partial("_PhotoView", photo)
+        </div>
+    }
+</div>
+
+<div id="pages">
+
+</div>
+
+@section Scripts{
+    <script>
+            var numberOfPages = @Model.NumberOfPages;
+            var currentPage = @Model.CurrentPage;
+            var maxButtons = @Model.MaxButtons;
+            var idAlbum = @Model.Id;
+    </script>
+    <script src="~/Scripts/app/showDetailedAlbum.js"></script>
+}
